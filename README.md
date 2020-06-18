@@ -1,2 +1,7 @@
 # vnode-demo
-vue-node-elementUI 搭建后台管理站点
+
+## 技术栈
+
+### 前端
+
+### 后端
