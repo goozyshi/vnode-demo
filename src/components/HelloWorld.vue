@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { getPosts } from '@/config/http'
+import { getPosts, postTodos } from '@/config/http'
 export default {
   name: 'HelloWorld',
   props: {
@@ -28,8 +28,11 @@ export default {
     handleAge () {
       this.$emit('getAge', { name: 'ds', age: 2 })
     },
-    request () {
-      getPosts().then(res => {
+    async request () {
+      const [postRes, postErr] = await this.$defer(getPosts())
+      console.log(postRes, postErr)
+      // if (postErr) throw new Error('获取post失败')
+      postTodos({ todo: 1 }).then(res => {
         console.log(res)
       })
     }

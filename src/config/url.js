@@ -1,3 +1,4 @@
 export default {
-  getPosts: '/posts'
+  getPosts: '/postss',
+  postTodos: '/todos'
 }

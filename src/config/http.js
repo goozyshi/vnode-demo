@@ -13,13 +13,41 @@ instance.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8
 // 请求拦截
 instance.interceptors.request.use(
   config => {
-    // todo: 请求携带token等
-    return config
+    // 用 sessionStorage 存取 token 值
+    // vuex 中 state 的值会在页面刷新后重置，不好用
+    const token = sessionStorage.getItem('token') || ''
+    if (!token) {
+      // 没有token，请求获取后携带于请求头header['token]中
+      return new Promise((resolve, reject) => {
+        const AUTH_URL = 'https://www.baidu.com'
+        const sign = 'db59af7ce14048acba1c9ea6e9ac1601' // 签名, 一般是 md5 转化后的哈希值
+        axios.post(AUTH_URL, { sign }).then(res => {
+          if (res.errorCode) {
+            sessionStorage.setItem('token', res.data) // 存入token
+            config.headers.token = res.data
+            resolve(config)
+          } else {
+            Message.warning('网络错误，请重试')
+            reject(new Error('获取token失败：' + res.errorMsg))
+          }
+        })
+      })
+    } else {
+      config.headers.token = token
+      return config
+    }
   }
 )
 // 返回拦截： token过期校验等
 instance.interceptors.response.use(
   response => {
+    const { errorCode, errorMsg } = response.data
+    // 假设-1的errorCode为token过期标识
+    if (errorCode === '-1') {
+      Message.warning('token已过期，请刷新重试')
+      sessionStorage.removeItem('token')
+      throw new Error(`token过期：${errorMsg}`)
+    }
     return response
   },
   error => {
@@ -36,3 +64,4 @@ const _http = {
 
 // 接口导出
 export const getPosts = (params) => _http.get(url.getPosts, params)
+export const postTodos = (params) => _http.post(url.postTodos, params)
