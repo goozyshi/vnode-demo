@@ -31,7 +31,7 @@ export default {
     async request () {
       const [postRes, postErr] = await this.$defer(getPosts())
       console.log(postRes, postErr)
-      // if (postErr) throw new Error('获取post失败')
+      if (postErr) throw new Error('获取post失败')
       postTodos({ todo: 1 }).then(res => {
         console.log(res)
       })

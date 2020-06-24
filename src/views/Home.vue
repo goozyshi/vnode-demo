@@ -1,17 +1,24 @@
 <template>
-  <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <login></login>
   </div>
 </template>
-
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Login from '@/views/Login'
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  components: { Login },
+  data () {
+    return {
+      value: ''
+    }
   }
 }
 </script>
+<style lang="scss" scoped>
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+  }
+</style>
