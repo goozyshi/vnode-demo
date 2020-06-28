@@ -6,29 +6,44 @@
 
 <style lang="scss">
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #24292e;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #fff;
+  color: #333;
 }
 
-#nav {
-  padding: 30px;
+.el-submenu [class^=fa] {
+  vertical-align: baseline;
+  margin-right: 10px;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.el-menu-item [class^=fa] {
+  vertical-align: baseline;
+  margin-right: 10px;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.toolbar {
+  background: #f2f2f2;
+  padding: 10px;
+  margin: 10px 0;
+.el-form-item {
+  margin-bottom: 10px;
+}
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.2s ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>

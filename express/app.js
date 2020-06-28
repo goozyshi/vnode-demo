@@ -24,6 +24,7 @@ app.use(errorHandler)
 
 // 服务器监听
 const server = app.listen(5000, () => {
-  const { address, port } = server.address()
+  let { address, port } = server.address()
+  address = (address === '::') ? 'http://localhost' : address
   console.log(`express server is runing at ${address}:${port}`)
 })

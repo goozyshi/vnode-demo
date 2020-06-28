@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>花里胡哨管理系统</h1>
+  <div class="container--login">
+    <h1>花栗鼠管理系统</h1>
     <el-form :model="userData" :rules="rules" ref="ruleForm">
       <el-form-item prop="userName">
         <el-input v-model="userData.userName"
@@ -21,7 +21,7 @@
         </el-input>
       </el-form-item>
     </el-form>
-    <el-button type="primary" :loading="isLoging" @click="handleLogin">登录</el-button>
+    <el-button type="primary" :loading="isLoging" @click="handleLogin" style="width: 100%">登录</el-button>
   </div>
 </template>
 <script>
@@ -49,10 +49,17 @@ export default {
       this.isLoging = true
       setTimeout(() => {
         this.isLoging = false
+        this.$router.push('/')
       }, 2000)
     }
   }
 }
 </script>
 <style lang="scss" scoped>
+  .container--login {
+    width: 400px;
+    margin-left: calc(50% - 200px);
+    margin-top: 10%;
+    padding: 10px;
+  }
 </style>

@@ -1,24 +1,17 @@
 <template>
-  <div class="container">
-    <login></login>
+  <div>
+    <h1>平平无奇的首页</h1>
   </div>
 </template>
 <script>
-import Login from '@/views/Login'
 export default {
-  components: { Login },
   data () {
     return {
-      value: ''
     }
+  },
+  methods: {
   }
 }
 </script>
 <style lang="scss" scoped>
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-self: center;
-  }
 </style>
