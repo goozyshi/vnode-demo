@@ -10,19 +10,19 @@
     active-text-color="#ffd04b"
     :collapse-transition="false"
   >
-    <h3 style="color: #fff">
+    <div class="menu-title">
       <img class="logo" src="https://img.icons8.com/color/96/000000/avengers.png"/>
-      <h4 v-show="!isCollapse" style="color: #fff">花栗鼠后台管理系统</h4>
-    </h3>
+      <h4 v-show="!isCollapse">花栗鼠后台管理系统</h4>
+    </div>
     <template v-for="(item, index) in menuData">
-      <div v-if="!item.hidden" :key="index">
+      <!-- <div v-if="" :key="index"> -->
         <!-- 不含子菜单 -->
-        <el-menu-item v-if="!item.children" :index="item.path" @click="clickMenu(item)">
+        <el-menu-item v-if="!item.hidden && !item.children" :index="item.path" @click="clickMenu(item)" :key="index">
           <i :class="item.icon"></i>
           <span slot="title">{{item.label}}</span>
         </el-menu-item>
         <!-- 含子菜单 -->
-        <el-submenu v-if="item.children && item.children.length" :index="index+''">
+        <el-submenu v-if="!item.hidden && item.children && item.children.length" :index="index+''" :key="index">
           <template slot="title">
             <i :class="item.icon"></i>
             <span slot="title">{{item.label}}</span>
@@ -31,7 +31,7 @@
             <span slot="title">{{child.label}}</span>
           </el-menu-item>
         </el-submenu>
-      </div>
+      <!-- </div> -->
     </template>
   </el-menu>
 </template>
@@ -50,7 +50,7 @@ export default {
   },
   data () {
     return {
-      defaultOpenProps: ['2'],
+      defaultOpenProps: ['1'],
       menuData: [
         {
           path: '/',
@@ -86,15 +86,15 @@ export default {
 .el-menu {
   height: 100%;
   border: none;
-  h3 {
+  .menu-title {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     color: #fff;
     height: 60px;
     line-height: 60px;
     margin: 0 auto;
-    padding: 0 25px;
+    padding: 0 20px;
     .logo {
       height: 32px;
       width: 32px;

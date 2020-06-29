@@ -1,7 +1,10 @@
 <template>
   <header>
     <div class="l-content">
-      <a href="#"> <i class="el-icon-menu" style="color: #fff" @click="triggerCollapse"></i> </a>
+      <el-button type="text" icon="el-icon-menu" @click="triggerCollapse" style="color: #fff"></el-button>
+      <el-breadcrumb style="display: inline-block; color: #fff; margin-left: 20px" separator="/">
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      </el-breadcrumb>
     </div>
     <div class="r-content">
       <el-dropdown trigger="click" size="mini">
