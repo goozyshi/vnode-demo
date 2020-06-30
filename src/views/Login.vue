@@ -58,8 +58,6 @@ export default {
 <style lang="scss" scoped>
   .container--login {
     width: 400px;
-    margin-left: calc(50% - 200px);
-    margin-top: 10%;
-    padding: 10px;
+    margin-bottom: 200px;
   }
 </style>

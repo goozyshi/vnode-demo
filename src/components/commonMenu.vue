@@ -8,7 +8,6 @@
     background-color="#24292e"
     text-color="#fff"
     active-text-color="#ffd04b"
-    :collapse-transition="false"
   >
     <div class="menu-title">
       <img class="logo" src="https://img.icons8.com/color/96/000000/avengers.png"/>
@@ -43,7 +42,18 @@ export default {
       return this.$store.state.isCollapse
     }
   },
+  mounted () {
+    this.initRouteTab()
+  },
   methods: {
+    initRouteTab () {
+      // 刷新时保留首页和当前页，首页在最前面
+      this.$store.commit('add-tab', { route: '/', name: '首页' })
+      if (this.$route.path !== '/') {
+        this.$store.commit('add-tab', { route: this.$route.path, name: this.$route.name })
+      }
+      this.$store.commit('set-index', this.$route.path)
+    },
     clickMenu (item) {
       this.$router.push({ path: item.path })
     }
@@ -84,7 +94,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .el-menu {
-  height: 100%;
   border: none;
   .menu-title {
     display: flex;

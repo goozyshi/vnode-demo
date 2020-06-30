@@ -2,9 +2,9 @@
   <header>
     <div class="l-content">
       <el-button type="text" icon="el-icon-menu" @click="triggerCollapse" style="color: #fff"></el-button>
-      <el-breadcrumb style="display: inline-block; color: #fff; margin-left: 20px" separator="/">
+      <!-- <el-breadcrumb style="display: inline-block; color: #fff; margin-left: 20px" separator="/">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      </el-breadcrumb>
+      </el-breadcrumb> -->
     </div>
     <div class="r-content">
       <el-dropdown trigger="click" size="mini">
@@ -32,9 +32,10 @@ export default {
   },
   methods: {
     triggerCollapse () {
-      this.$store.commit('collapseMenu')
+      this.$store.commit('collapse-menu')
     },
     logOut () {
+      this.$store.commit('clear-tab')
       this.$router.push('/login')
     }
   }

@@ -1,33 +1,28 @@
 <template>
   <el-container >
     <el-aside width="auto" style="overflow: hidden">
-      <common-aside></common-aside>
+      <common-menu></common-menu>
     </el-aside>
-  <div style="width: 100%">
-    <el-header style="background-color: #24292e">
-      <common-header></common-header>
-    </el-header>
-    <el-main>
-      <router-view></router-view>
-    </el-main>
-  </div>
+    <div style="width: 100%">
+      <el-header style="background-color: #24292e">
+        <common-header></common-header>
+      </el-header>
+      <el-main>
+        <common-tab></common-tab>
+      </el-main>
+    </div>
   </el-container>
 </template>
 <script>
-import commonAside from '@/components/commonAside'
+import commonMenu from '@/components/commonMenu'
 import commonHeader from '@/components/commonHeader'
+import commonTab from '@/components/commonTab'
+
 export default {
-  components: { commonAside, commonHeader },
-  computed: {
-    isCollapse () {
-      return this.$store.state.isCollapse
-    }
-  },
+  components: { commonMenu, commonHeader, commonTab },
   data () {
     return {
     }
-  },
-  methods: {
   }
 }
 </script>

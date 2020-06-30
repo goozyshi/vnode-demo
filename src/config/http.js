@@ -18,5 +18,4 @@ const _http = {
 }
 
 // 接口导出
-export const getPosts = (params) => _http.get(url.getPosts, params)
-export const postTodos = (params) => _http.post(url.postTodos, params)
+export const getPoetry = (params) => _http.get(url.getPoetry, params)

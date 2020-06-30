@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/login',
-    name: 'Login',
+    name: '登录',
     component: () => import('../views/Login.vue')
   },
   {
@@ -18,12 +18,12 @@ const routes = [
       // 子标签页都需要放到统一的父组件内
       {
         path: '/',
-        name: 'Home',
+        name: '首页',
         component: () => import('../views/Home.vue')
       },
       {
         path: '/about',
-        name: 'About',
+        name: '关于',
         component: () => import('../views/About.vue')
       }
     ]
@@ -36,12 +36,12 @@ const routes = [
       // 子标签页都需要放到统一的父组件内
       {
         path: '/cover',
-        name: 'cover',
+        name: '封面',
         component: () => import('../views/book/cover.vue')
       },
       {
         path: '/codex',
-        name: 'codex',
+        name: '附录',
         component: () => import('../views/book/codex.vue')
       }
     ]

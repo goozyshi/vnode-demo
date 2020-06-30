@@ -1,4 +1,3 @@
 export default {
-  getPosts: '/posts',
-  postTodos: '/todos'
+  getPoetry: 'https://v2.jinrishici.com/sentence'
 }
