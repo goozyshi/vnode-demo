@@ -43,6 +43,11 @@ const routes = [
         path: '/codex',
         name: '附录',
         component: () => import('../views/book/codex.vue')
+      },
+      {
+        path: '/detail',
+        name: '详情页',
+        component: () => import('../views/book/detail.vue')
       }
     ]
   }

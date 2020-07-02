@@ -13,7 +13,10 @@
         :label="item.name"
         :name="item.route"
       >
-        <router-view></router-view>
+        <!-- 缓存组件 name 以 Keep 结尾的组件 -->
+        <keep-alive :include="/Keep$/">
+          <router-view></router-view>
+        </keep-alive>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -23,17 +26,18 @@
 export default {
   watch: {
     '$route' (to) {
+      console.log(to)
       let flag = false
       for (const op of this.visitedTabs) {
-        if (op.route === to.path) {
+        if (op.route === to.fullPath) {
           flag = true
-          this.$store.commit('set-index', to.path)
+          this.$store.commit('set-index', to.fullPath)
           break
         }
       }
       if (!flag) {
-        this.$store.commit('add-tab', { route: to.path, name: to.name })
-        this.$store.commit('set-index', to.path)
+        this.$store.commit('add-tab', { route: to.fullPath, name: to.name })
+        this.$store.commit('set-index', to.fullPath)
       }
     }
   },
@@ -42,7 +46,6 @@ export default {
       return this.$store.state.isCollapse
     },
     visitedTabs () {
-      console.log(this.$store.state.tab.visitedTabs)
       return this.$store.state.tab.visitedTabs
     },
     currentIndex: {

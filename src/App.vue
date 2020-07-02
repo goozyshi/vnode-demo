@@ -21,6 +21,7 @@ html, body {
   height: 100%;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 ::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
   width: 10px;

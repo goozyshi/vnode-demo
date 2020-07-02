@@ -11,10 +11,10 @@ export default {
     },
     [DELETE_TAB] (state, route) {
       const index = state.visitedTabs.findIndex(op => op.route === route)
-      console.log('state', route)
       state.visitedTabs.splice(index, 1)
     },
     [SET_INDEX] (state, index) {
+      console.log('路由：', index)
       state.currentIndex = index
     },
     [CLEAR_TAB] (state) {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>{{poetryContent}}</h2>
-    <el-tag effect="dark">今日</el-tag>
+    <el-tag effect="dark">今日·一言</el-tag>
     </div>
 </template>
 <script>
@@ -20,7 +20,6 @@ export default {
     async request () {
       const [poetryRes, poetryErr] = await this.$defer(getPoetry())
       if (poetryErr) throw new Error('获取今日诗词API接口失败')
-      console.log(poetryRes.data)
       // 试下vue的新写法
       this.poetryContent = poetryRes?.data?.data?.content
     }

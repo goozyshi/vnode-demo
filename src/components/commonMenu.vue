@@ -36,6 +36,7 @@
   </el-menu>
 </template>
 <script>
+import menuData from '../router/menu'
 export default {
   computed: {
     isCollapse () {
@@ -48,47 +49,24 @@ export default {
   },
   methods: {
     initRouteTab () {
+      console.log('初始化')
       // 刷新时保留首页和当前页，首页在最前面
       this.$store.commit('add-tab', { route: '/', name: '首页' })
       if (this.$route.path !== '/') {
+        console.log(this.$route)
         this.$store.commit('add-tab', { route: this.$route.path, name: this.$route.name })
       }
       this.$store.commit('set-index', this.$route.path)
     },
     clickMenu (item) {
+      console.log(item)
       this.$router.push({ path: item.path })
     }
   },
   data () {
     return {
       defaultOpenProps: ['1'],
-      menuData: [
-        {
-          path: '/',
-          name: 'Home',
-          label: '首页',
-          icon: 'el-icon-s-home'
-        },
-        {
-          path: '/book',
-          name: 'book',
-          label: '书籍',
-          icon: 'el-icon-reading',
-          children: [
-            { path: '/cover', name: 'cover', label: '封面' },
-            { path: '/codex', name: 'codex', label: '附录' }
-          ]
-        },
-        {
-          path: '/other',
-          name: 'other',
-          label: '其他',
-          icon: 'el-icon-magic-stick',
-          children: [
-            { path: '/about', name: 'about', label: '关于' }
-          ]
-        }
-      ]
+      menuData
     }
   }
 }
