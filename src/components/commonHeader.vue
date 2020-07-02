@@ -2,8 +2,9 @@
   <header>
     <div class="l-content">
       <el-button type="text" icon="el-icon-menu" @click="triggerCollapse" style="color: #fff"></el-button>
-      <!-- <el-breadcrumb style="display: inline-block; color: #fff; margin-left: 20px" separator="/">
+      <!-- <el-breadcrumb style="display: inline-block; margin-left: 20px" separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="currentIndex">封面</el-breadcrumb-item>
       </el-breadcrumb> -->
     </div>
     <div class="r-content">
@@ -25,6 +26,9 @@ export default {
   computed: {
     isCollapse () {
       return this.$store.state.isCollapse
+    },
+    currentIndex () {
+      return this.$store.state.tab.currentIndex
     }
   },
   data () {
@@ -35,7 +39,6 @@ export default {
       this.$store.commit('collapse-menu')
     },
     logOut () {
-      this.$store.commit('clear-tab')
       this.$router.push('/login')
     }
   }

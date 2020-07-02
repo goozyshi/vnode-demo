@@ -8,6 +8,7 @@
     background-color="#24292e"
     text-color="#fff"
     active-text-color="#ffd04b"
+    :collapse-transition="false"
   >
     <div class="menu-title">
       <img class="logo" src="https://img.icons8.com/color/96/000000/avengers.png"/>
@@ -93,11 +94,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.el-menu-vertical-demo {
+  width: 200px;
+  height: 100vh
+}
 .el-menu {
   border: none;
   .menu-title {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
     color: #fff;
     height: 60px;
@@ -109,9 +113,5 @@ export default {
       width: 32px;
     }
   }
-}
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
-  min-height: 400px;
 }
 </style>

@@ -4,7 +4,7 @@
     <h2>首页</h2>
     <ul>
       <li>✅ 可折叠菜单栏，自适应内容</li>
-      <li>vuex 实现路由 + tabs联动</li>
+      <li>✅ vuex 实现路由 + tabs联动</li>
       <li>头像上传</li>
     </ul>
     <h2>导入导出</h2>

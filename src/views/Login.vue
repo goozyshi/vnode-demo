@@ -42,6 +42,9 @@ export default {
       }
     }
   },
+  mounted () {
+    this.$store.commit('clear-tab')
+  },
   methods: {
     handleLogin () {
       const { userName, password } = this.userData

@@ -1,14 +1,14 @@
 <template>
-  <el-container >
-    <el-aside width="auto" style="overflow: hidden">
+  <el-container>
+    <el-aside width="auto">
       <common-menu></common-menu>
     </el-aside>
-    <div style="width: 100%">
-      <el-header style="background-color: #24292e">
+    <div class="app-main">
+      <el-header class="app-header">
         <common-header></common-header>
       </el-header>
-      <el-main>
-        <common-tab></common-tab>
+      <el-main class="app-wrap">
+        <common-tab-view></common-tab-view>
       </el-main>
     </div>
   </el-container>
@@ -16,10 +16,10 @@
 <script>
 import commonMenu from '@/components/commonMenu'
 import commonHeader from '@/components/commonHeader'
-import commonTab from '@/components/commonTab'
+import commonTabView from '@/components/commonTabView'
 
 export default {
-  components: { commonMenu, commonHeader, commonTab },
+  components: { commonMenu, commonHeader, commonTabView },
   data () {
     return {
     }
@@ -27,8 +27,17 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  .el-menu-vertical-demo {
-    width: 200px;
+  .app-main {
+    display: flex;
+    flex: 1;
+    flex-shrink: 0;
+    flex-direction: column;
     height: 100vh;
+    .app-header {
+      background-color: #24292e;
+    }
+    .app-wrap {
+      padding: 5px;
+    }
   }
 </style>

@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <div style="height: 100%;">
     <el-tabs v-if="visitedTabs.length"
+      class="content-wrap"
       v-model="currentIndex"
-      type="card"
-      closable
+      type="border-card"
       @tab-click="tabClick"
       @tab-remove="tabRemove"
       >
       <el-tab-pane v-for="item in visitedTabs"
+        :closable="item.route !== '/'"
         :key="item.route"
         :label="item.name"
         :name="item.route"
@@ -18,6 +19,7 @@
   </div>
 </template>
 <script>
+// TODO: 切换tab时存在多次请求
 export default {
   watch: {
     '$route' (to) {
@@ -40,6 +42,7 @@ export default {
       return this.$store.state.isCollapse
     },
     visitedTabs () {
+      console.log(this.$store.state.tab.visitedTabs)
       return this.$store.state.tab.visitedTabs
     },
     currentIndex: {
@@ -80,5 +83,13 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
+  .content-wrap {
+    height: 100%;
+    padding: 0;
+    overflow: hidden;
+    /deep/ .el-tabs__content {
+      overflow: scroll;
+      height: 100%;
+    }
+  }
 </style>
