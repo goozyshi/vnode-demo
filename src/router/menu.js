@@ -7,7 +7,7 @@ const menu = [
   },
   {
     path: '/book',
-    name: 'book',
+    name: '书籍',
     label: '书籍',
     icon: 'el-icon-reading',
     children: [

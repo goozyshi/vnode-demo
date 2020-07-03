@@ -59,7 +59,6 @@ export default {
       this.$store.commit('set-index', this.$route.path)
     },
     clickMenu (item) {
-      console.log(item)
       this.$router.push({ path: item.path })
     }
   },

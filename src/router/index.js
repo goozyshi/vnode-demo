@@ -2,6 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Layout from '../views/Layout.vue'
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push (location) {
+  // 路由出错不打印：例如重复路由跳转
+  return originalPush.call(this, location).catch(err => err)
+}
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -20,18 +26,14 @@ const routes = [
         path: '/',
         name: '首页',
         component: () => import('../views/Home.vue')
-      },
-      {
-        path: '/about',
-        name: '关于',
-        component: () => import('../views/About.vue')
       }
     ]
   },
   {
     path: '/book',
-    name: 'book',
+    name: '书籍',
     component: Layout,
+    redirect: '/cover',
     children: [
       // 子标签页都需要放到统一的父组件内
       {
@@ -48,6 +50,20 @@ const routes = [
         path: '/detail',
         name: '详情页',
         component: () => import('../views/book/detail.vue')
+      }
+    ]
+  },
+  {
+    path: '/other',
+    name: '其他',
+    label: '其他',
+    redirect: '/about',
+    component: Layout,
+    children: [
+      {
+        path: '/about',
+        name: '关于',
+        component: () => import('../views/About.vue')
       }
     ]
   }

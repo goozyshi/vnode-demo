@@ -21,8 +21,7 @@ import commonTabView from '@/components/commonTabView'
 export default {
   components: { commonMenu, commonHeader, commonTabView },
   data () {
-    return {
-    }
+    return {}
   }
 }
 </script>

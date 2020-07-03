@@ -2,10 +2,11 @@
   <header>
     <div class="l-content">
       <el-button type="text" icon="el-icon-menu" @click="triggerCollapse" style="color: #fff"></el-button>
-      <!-- <el-breadcrumb style="display: inline-block; margin-left: 20px" separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="currentIndex">封面</el-breadcrumb-item>
-      </el-breadcrumb> -->
+      <el-breadcrumb style="display: inline-block; margin-left: 20px" separator-class="el-icon-arrow-right">
+        <el-breadcrumb-item v-for="tab in breadcrumbList" :key="tab.path" :to="tab">
+          {{ tab.name }}
+        </el-breadcrumb-item>
+      </el-breadcrumb>
     </div>
     <div class="r-content">
       <el-dropdown trigger="click" size="mini">
@@ -29,6 +30,9 @@ export default {
     },
     currentIndex () {
       return this.$store.state.tab.currentIndex
+    },
+    breadcrumbList () {
+      return this.$store.state.breadcrumbList
     }
   },
   data () {
@@ -49,6 +53,13 @@ export default {
     line-height: 60px;
     .l-content {
       float: left;
+      line-height: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      /deep/ .el-breadcrumb__inner {
+        color: #fff;
+      }
     }
     .r-content {
       float: right;

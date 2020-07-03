@@ -5,6 +5,7 @@
     <ul>
       <li>✅ 可折叠菜单栏，自适应内容</li>
       <li>✅ vuex 实现路由 + tabs联动</li>
+      <li>✅ header 路径面包屑</li>
       <li>头像上传</li>
     </ul>
     <h2>导入导出</h2>

@@ -1,13 +1,13 @@
 <template>
   <div style="height: 100%;">
-    <el-tabs v-if="visitedTabs.length"
+    <el-tabs v-if="tabOptions.length"
       class="content-wrap"
       v-model="currentIndex"
       type="border-card"
       @tab-click="tabClick"
       @tab-remove="tabRemove"
       >
-      <el-tab-pane v-for="item in visitedTabs"
+      <el-tab-pane v-for="item in tabOptions"
         :closable="item.route !== '/'"
         :key="item.route"
         :label="item.name"
@@ -26,41 +26,31 @@
 export default {
   watch: {
     '$route' (to) {
-      console.log(to)
-      let flag = false
-      for (const op of this.visitedTabs) {
-        if (op.route === to.fullPath) {
-          flag = true
-          this.$store.commit('set-index', to.fullPath)
-          break
-        }
-      }
-      if (!flag) {
-        this.$store.commit('add-tab', { route: to.fullPath, name: to.name })
-        this.$store.commit('set-index', to.fullPath)
-      }
+      const flag = this.tabOptions.findIndex(op => op.route === to.fullPath) > -1
+      !flag && this.$store.commit('add-tab', { route: to.fullPath, name: to.name })
+      this.$store.commit('set-index', to.fullPath)
     }
   },
   computed: {
     isCollapse () {
       return this.$store.state.isCollapse
     },
-    visitedTabs () {
-      return this.$store.state.tab.visitedTabs
+    tabOptions () {
+      return this.$store.state.tab.tabOptions
     },
     currentIndex: {
       get () {
+        this.getBreadCrumb(this.$route)
         return this.$store.state.tab.currentIndex
       },
       set (index) {
         this.$store.commit('set-index', index)
+        this.getBreadCrumb(this.$route)
       }
     }
   },
   data () {
-    return {
-
-    }
+    return {}
   },
   methods: {
     tabClick (tab) {
@@ -73,14 +63,22 @@ export default {
       }
       this.$store.commit('delete-tab', tabName)
       if (this.currentIndex === tabName) {
-        if (this.visitedTabs && this.visitedTabs.length) {
-          this.$store.commit('set-index', this.visitedTabs[this.visitedTabs.length - 1].route)
+        if (this.tabOptions && this.tabOptions.length) {
+          this.$store.commit('set-index', this.tabOptions[this.tabOptions.length - 1].route)
           this.$router.replace({ path: this.currentIndex })
         } else {
           this.$router.replace({ path: '/' })
         }
       }
-      console.log(tabName)
+    },
+    getBreadCrumb (route) {
+      // 获取路由路径面包屑
+      let matchList = route.matched.filter(m => m.path && m.name)
+      if (matchList[0].path !== '/') {
+        matchList = [{ path: '/', name: '首页' }].concat(matchList)
+      }
+      // const filter = matchList.filter(item => item.meta && item.meta)
+      this.$store.commit('set-breadcrumb', matchList)
     }
   }
 }
