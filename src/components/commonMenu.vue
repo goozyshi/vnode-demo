@@ -44,20 +44,7 @@ export default {
       return this.$store.state.isCollapse
     }
   },
-  mounted () {
-    this.initRouteTab()
-  },
   methods: {
-    initRouteTab () {
-      console.log('初始化')
-      // 刷新时保留首页和当前页，首页在最前面
-      this.$store.commit('add-tab', { route: '/', name: '首页' })
-      if (this.$route.path !== '/') {
-        console.log(this.$route)
-        this.$store.commit('add-tab', { route: this.$route.path, name: this.$route.name })
-      }
-      this.$store.commit('set-index', this.$route.path)
-    },
     clickMenu (item) {
       this.$router.push({ path: item.path })
     }

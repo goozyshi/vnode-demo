@@ -12,17 +12,17 @@
         :key="item.route"
         :label="item.name"
         :name="item.route"
-      >
-        <!-- 缓存组件 name 以 Keep 结尾的组件 -->
-        <keep-alive :include="/Keep$/">
-          <router-view></router-view>
-        </keep-alive>
-      </el-tab-pane>
+      ></el-tab-pane>
+      <!-- routeView若写在 el-tab-pane 标签内，则标签创建时都会声明一个特定的routeview -->
+      <!-- 这样，3个标签时则触发3次route-view的生命周期方法 -->
+      <!-- 缓存组件 name 以 Keep 结尾的组件 -->
+      <keep-alive :include="/Keep$/">
+        <router-view></router-view>
+      </keep-alive>
     </el-tabs>
   </div>
 </template>
 <script>
-// TODO: 切换tab时存在多次请求
 export default {
   watch: {
     '$route' (to) {
