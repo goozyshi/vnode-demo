@@ -22,14 +22,6 @@ export default {
   components: { commonMenu, commonHeader, commonTabView },
   data () {
     return {}
-  },
-  mounted () {
-    // 刷新时保留首页和当前页，首页在最前面
-    this.$store.commit('add-tab', { route: '/', name: '首页' })
-    if (this.$route.path !== '/') {
-      this.$store.commit('add-tab', { route: this.$route.path, name: this.$route.name })
-    }
-    this.$store.commit('set-index', this.$route.path)
   }
 }
 </script>

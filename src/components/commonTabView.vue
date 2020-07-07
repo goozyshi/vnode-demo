@@ -12,29 +12,32 @@
         :key="item.route"
         :label="item.name"
         :name="item.route"
-      ></el-tab-pane>
+      >
       <!-- routeView若写在 el-tab-pane 标签内，则标签创建时都会声明一个特定的routeview -->
       <!-- 这样，3个标签时则触发3次route-view的生命周期方法 -->
       <!-- 缓存组件 name 以 Keep 结尾的组件 -->
-      <keep-alive :include="/Keep$/">
-        <router-view></router-view>
-      </keep-alive>
+      <transition name="fade" mode="out-in">
+        <keep-alive :include="/Keep$/">
+          <router-view></router-view>
+        </keep-alive>
+      </transition>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 <script>
 export default {
   watch: {
-    '$route' (to) {
-      const flag = this.tabOptions.findIndex(op => op.route === to.fullPath) > -1
-      !flag && this.$store.commit('add-tab', { route: to.fullPath, name: to.name })
-      this.$store.commit('set-index', to.fullPath)
+    $route: {
+      immediate: true,
+      handler (to) {
+        const flag = this.tabOptions.findIndex(op => op.route === to.fullPath) > -1
+        !flag && this.$store.commit('add-tab', { route: to.fullPath, name: to.name })
+        this.$store.commit('set-index', to.fullPath)
+      }
     }
   },
   computed: {
-    isCollapse () {
-      return this.$store.state.isCollapse
-    },
     tabOptions () {
       return this.$store.state.tab.tabOptions
     },
@@ -54,8 +57,7 @@ export default {
   },
   methods: {
     tabClick (tab) {
-      const isSamePath = location.pathname === this.currentIndex
-      !isSamePath && this.$router.replace({ path: this.currentIndex })
+      this.$router.push({ path: this.currentIndex })
     },
     tabRemove (tabName) {
       if (tabName === '/') {
@@ -92,5 +94,14 @@ export default {
       overflow: scroll;
       height: 100%;
     }
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: all .2s ease;
+  }
+
+  .fade-enter,
+  .fade-leave-active {
+    opacity: 0;
   }
 </style>

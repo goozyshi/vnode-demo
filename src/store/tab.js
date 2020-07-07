@@ -2,7 +2,7 @@ import { ADD_TAB, DELETE_TAB, SET_INDEX, CLEAR_TAB } from './mutations-type'
 export default {
   nameSpace: true,
   state: {
-    tabOptions: [],
+    tabOptions: [{ route: '/', name: '首页' }],
     currentIndex: '/',
     breadcrumbList: []
   },
