@@ -13,10 +13,6 @@ Vue.prototype.$defer = (promise) => {
     .catch(error => Promise.resolve([undefined, error]))
 }
 
-Vue.directive('_focus', (el) => {
-  console.log(el)
-  el.focus()
-})
 // $defer 函数接受一个 Promise 对象作为参数，并总是 resolve 它，以 [data | undefined, undefined | error] 的形式返回结果。
 // 如果 Promise resolve 了，handle 函数返回 [data, undefined]；
 // 如果 Promise reject 了，handle 函数返回 [undefined, Error]。

@@ -1,15 +1,15 @@
 <template>
   <div class="container--login">
-    <h1>花栗鼠管理系统</h1>
+    <h1 style="text-align: center">花栗鼠管理系统</h1>
     <el-form :model="userData" :rules="rules" ref="ruleForm">
       <el-form-item prop="userName">
-        <el-input v-model="userData.userName"
+        <el-input v-model="userData.userName" ref="login-usr"
           prefix-icon="el-icon-user"
           placeholder="请输入用户名"
         ></el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="userData.password"
+        <el-input v-model="userData.password" ref="login-pwd"
           prefix-icon="el-icon-lock"
           :type="isShow ? 'text' : 'password'"
           placeholder="请输入密码"
@@ -26,13 +26,23 @@
 </template>
 <script>
 export default {
+  watch: {
+    isShow: {
+      handler (val) {
+        this.$nextTick(() => {
+          val && this.$refs['login-pwd'].focus()
+        })
+      }
+    }
+  },
   data () {
     return {
       isLoging: false,
+      isCaps: false, // 是否大写
       isShow: false,
       userData: {
         userName: 'admin',
-        password: 'admin'
+        password: ''
       },
       rules: {
         userName: [
@@ -44,6 +54,11 @@ export default {
   },
   mounted () {
     this.$store.commit('clear-tab')
+    this.$nextTick(() => {
+      // 字段为空自动聚焦
+      !this.userData.password && this.$refs['login-pwd'].focus()
+      !this.userData.userName && this.$refs['login-usr'].focus()
+    })
   },
   methods: {
     handleLogin () {

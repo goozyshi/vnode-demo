@@ -6,8 +6,16 @@ app.use(bodyParser.json())
 
 // 注册路由
 const Router = require('./router/router')
+app.all('*', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.type('application/json;charset=utf-8')
+  next()
+})
 app.get('/', (req, res) => {
-  res.send('欢迎来到wzry')
+  res.json({
+    name: 'admin',
+    role: 'admin'
+  })
 })
 app.use(Router)
 app.get('/error', (req, res) => {
