@@ -21,10 +21,11 @@
         </el-input>
       </el-form-item>
     </el-form>
-    <el-button type="primary" :loading="isLoging" @click="handleLogin" style="width: 100%">登录</el-button>
+    <el-button type="primary" @click="handleLogin" style="width: 100%">登录</el-button>
   </div>
 </template>
 <script>
+import { loginExpServer, getUserInfo } from '@/config/http'
 export default {
   watch: {
     isShow: {
@@ -37,7 +38,6 @@ export default {
   },
   data () {
     return {
-      isLoging: false,
       isCaps: false, // 是否大写
       isShow: false,
       userData: {
@@ -63,12 +63,15 @@ export default {
   methods: {
     handleLogin () {
       const { userName, password } = this.userData
-      this.$message.warning(`用户名： ${userName}; 密码：${password}`)
-      this.isLoging = true
-      setTimeout(() => {
-        this.isLoging = false
-        this.$router.push('/')
-      }, 2000)
+      loginExpServer({ userName, password }).then(({ data: res }) => {
+        if (res.errorCode === 0) {
+          this.$router.push('/')
+          this.$message.success('登录成功')
+          getUserInfo({ userName }).then()
+        } else {
+          this.$message.error(res.errorMsg)
+        }
+      })
     }
   }
 }
