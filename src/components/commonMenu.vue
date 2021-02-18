@@ -12,7 +12,7 @@
   >
     <div class="menu-title">
       <img class="logo" src="https://img.icons8.com/color/96/000000/avengers.png"/>
-      <h4 v-show="!isCollapse">花栗鼠后台管理系统</h4>
+      <h4 v-show="!isCollapse">后台管理系统</h4>
     </div>
     <template v-for="(item, index) in menuData">
       <!-- <div v-if="" :key="index"> -->

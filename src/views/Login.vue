@@ -1,6 +1,6 @@
 <template>
   <div class="container--login">
-    <h1 style="text-align: center">花栗鼠管理系统</h1>
+    <h1 style="text-align: center">管理系统</h1>
     <el-form :model="userData" :rules="rules" ref="ruleForm">
       <el-form-item prop="userName">
         <el-input v-model="userData.userName" ref="login-usr"
@@ -65,7 +65,9 @@ export default {
       const { userName, password } = this.userData
       loginExpServer({ userName, password }).then(({ data: res }) => {
         if (res.errorCode === 0) {
-          this.$router.push('/')
+          const { redirect = '/' } = this.$route.query
+          this.$router.push(redirect)
+          sessionStorage.setItem('user_login_token', true)
           this.$message.success('登录成功')
           getUserInfo({ userName }).then()
         } else {

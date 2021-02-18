@@ -43,6 +43,7 @@ export default {
       this.$store.commit('collapse-menu')
     },
     logOut () {
+      sessionStorage.removeItem('user_login_token')
       this.$router.push('/login')
     }
   }

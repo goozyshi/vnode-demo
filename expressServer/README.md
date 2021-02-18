@@ -6,6 +6,7 @@ cnpm i -S nodemon
 cnpm i -S boom
 cnpm i -S cors
 cnpm i -S body-parser
+cnpm i -S mysql
 ```
 
 ## express 三大概念
