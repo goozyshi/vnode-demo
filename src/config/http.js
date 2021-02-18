@@ -19,3 +19,5 @@ const _http = {
 
 // 接口导出
 export const getPoetry = (params) => _http.get(url.getPoetry, params)
+export const loginExpServer = params => _http.post(url.postLogin, params)
+export const getUserInfo = (params) => _http.get(url.getUserInfo, params)

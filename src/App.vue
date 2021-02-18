@@ -3,6 +3,19 @@
     <router-view/>
   </div>
 </template>
+<script>
+export default {
+  watch: {
+    $route (to, from) {
+      const token = sessionStorage.getItem('user_login_token')
+      const redirect = to.fullPath || '/'
+      if (to.path !== '/login' && !token) {
+        this.$router.push({ path: '/login', query: { redirect } })
+      }
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 html, body {
