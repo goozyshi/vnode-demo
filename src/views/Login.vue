@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import { loginExpServer, getUserInfo } from '@/config/http'
+import { loginExpServer } from '@/config/http'
 export default {
   watch: {
     isShow: {
@@ -67,9 +67,9 @@ export default {
         if (res.errorCode === 0) {
           const { redirect = '/' } = this.$route.query
           this.$router.push(redirect)
-          sessionStorage.setItem('user_login_token', true)
+          const { token } = res.data
+          sessionStorage.setItem('user_login_token', token)
           this.$message.success('登录成功')
-          getUserInfo({ userName }).then()
         } else {
           this.$message.error(res.errorMsg)
         }

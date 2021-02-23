@@ -1,5 +1,5 @@
 // 封装 Result 响应返回
-const { ERROR_CODE, SUCCESS_CODE } = require('../utils/constant')
+const { ERROR_CODE, SUCCESS_CODE, TOKEN_EXPIRE_CODE } = require('../utils/constant')
 
 class Result {
   constructor (data = null, msg = '请求成功 OK', options) {
@@ -7,6 +7,10 @@ class Result {
     this.msg = msg
     this.data = data
     this.options = options
+  }
+  expired (res) {
+    this.code = TOKEN_EXPIRE_CODE
+    this.json(res)
   }
   success (res) {
     this.code = SUCCESS_CODE

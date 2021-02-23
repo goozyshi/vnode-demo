@@ -1,16 +1,24 @@
 <template>
   <div>
-    <h2>{{poetryContent}}</h2>
-    <el-tag effect="dark">今日·一言</el-tag>
+    <el-avatar :size="100" :src="userInfo.avatar"></el-avatar>
+    <h1 >
+      <span style="color: #c39b5e;">{{userInfo.nickname}}</span>
+      ·{{roleOptions[userInfo.role]}}
+    </h1>
+    <p>{{userInfo.remark || ''}}</p>
     </div>
 </template>
 <script>
-import { getPoetry } from '@/config/http'
+import { getUserInfo } from '@/config/http'
 
 export default {
   data () {
     return {
-      poetryContent: ''
+      roleOptions: {
+        admin: '管理员',
+        guest: '游客'
+      },
+      userInfo: {}
     }
   },
   created () {
@@ -18,10 +26,9 @@ export default {
   },
   methods: {
     async request () {
-      const [poetryRes, poetryErr] = await this.$defer(getPoetry())
-      if (poetryErr) throw new Error('获取今日诗词API接口失败')
-      // 试下vue的新写法
-      this.poetryContent = poetryRes?.data?.data?.content
+      getUserInfo().then(({ data: res }) => {
+        this.userInfo = res.data || {}
+      })
     }
   }
 }
