@@ -15,7 +15,7 @@
           <i class="el-icon-caret-bottom"/>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item @click.native="$router.push('/')">个人中心</el-dropdown-item>
+          <el-dropdown-item @click.native="refreshMe">个人中心</el-dropdown-item>
           <el-dropdown-item @click.native="logOut">退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -23,6 +23,7 @@
   </header>
 </template>
 <script>
+import { getUserInfo } from '../config/http'
 export default {
   computed: {
     isCollapse () {
@@ -41,6 +42,9 @@ export default {
   methods: {
     triggerCollapse () {
       this.$store.commit('collapse-menu')
+    },
+    refreshMe () {
+      getUserInfo({}).then()
     },
     logOut () {
       sessionStorage.removeItem('user_login_token')

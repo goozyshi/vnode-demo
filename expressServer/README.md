@@ -9,6 +9,7 @@ cnpm i -S body-parser
 cnpm i -S mysql
 cnpm i -S crypto
 cnpm i -S jsonwebtoken
+cnpm i -S express-jwt
 ```
 
 ## express 三大概念

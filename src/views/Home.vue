@@ -1,16 +1,22 @@
 <template>
   <div>
-    <h2>{{poetryContent}}</h2>
-    <el-tag effect="dark">今日·一言</el-tag>
+    <h2>用户信息</h2>
+    <el-avatar size="medium" :src="userInfo.avatar"></el-avatar>
+    <el-form>
+      <el-form-item label="姓名">{{userInfo.username}}</el-form-item>
+      <el-form-item label="id">{{userInfo.id}}</el-form-item>
+      <el-form-item label="昵称">{{userInfo.nickname}}</el-form-item>
+    </el-form>
     </div>
 </template>
 <script>
-import { getPoetry } from '@/config/http'
+import { getUserInfo } from '@/config/http'
 
 export default {
   data () {
     return {
-      poetryContent: ''
+      poetryContent: '',
+      userInfo: {}
     }
   },
   created () {
@@ -18,10 +24,10 @@ export default {
   },
   methods: {
     async request () {
-      const [poetryRes, poetryErr] = await this.$defer(getPoetry())
-      if (poetryErr) throw new Error('获取今日诗词API接口失败')
-      // 试下vue的新写法
-      this.poetryContent = poetryRes?.data?.data?.content
+      getUserInfo().then(({ data: res }) => {
+        console.log(res, '====')
+        this.userInfo = res.data || {}
+      })
     }
   }
 }

@@ -27,6 +27,23 @@ const querySQL = sql => {
   })
 }
 
+const queryOne = sql => {
+  return new Promise((resolve, reject) => {
+    querySQL(sql)
+      .then(res => {
+        if (res && res.length > 0) {
+          resolve(res[0])
+        } else {
+          resolve(null)
+        }
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+}
+
 module.exports = {
-  querySQL
+  querySQL,
+  queryOne
 }

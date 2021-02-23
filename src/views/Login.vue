@@ -67,9 +67,10 @@ export default {
         if (res.errorCode === 0) {
           const { redirect = '/' } = this.$route.query
           this.$router.push(redirect)
-          sessionStorage.setItem('user_login_token', true)
+          const { token } = res.data
+          sessionStorage.setItem('user_login_token', token)
           this.$message.success('登录成功')
-          getUserInfo({ userName }).then()
+          getUserInfo({}).then()
         } else {
           this.$message.error(res.errorMsg)
         }
