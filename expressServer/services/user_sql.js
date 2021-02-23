@@ -9,7 +9,7 @@ const sql_login = (username, password) => {
 
 // sql 查询获取用户信息
 const sql_getInfo = (username) => {
-  const sql = `select id, role, nickname, username, avatar from login_user where username = '${username}'`
+  const sql = `select id, role, nickname, username, avatar, remark from login_user where username = '${username}'`
   return queryOne(sql)
 }
 

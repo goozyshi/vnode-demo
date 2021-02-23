@@ -1,12 +1,11 @@
 <template>
   <div>
-    <h2>用户信息</h2>
-    <el-avatar size="medium" :src="userInfo.avatar"></el-avatar>
-    <el-form>
-      <el-form-item label="姓名">{{userInfo.username}}</el-form-item>
-      <el-form-item label="id">{{userInfo.id}}</el-form-item>
-      <el-form-item label="昵称">{{userInfo.nickname}}</el-form-item>
-    </el-form>
+    <el-avatar :size="100" :src="userInfo.avatar"></el-avatar>
+    <h1 >
+      <span style="color: #c39b5e;">{{userInfo.nickname}}</span>
+      ·{{roleOptions[userInfo.role]}}
+    </h1>
+    <p>{{userInfo.remark || ''}}</p>
     </div>
 </template>
 <script>
@@ -15,7 +14,10 @@ import { getUserInfo } from '@/config/http'
 export default {
   data () {
     return {
-      poetryContent: '',
+      roleOptions: {
+        admin: '管理员',
+        guest: '游客'
+      },
       userInfo: {}
     }
   },
@@ -25,7 +27,6 @@ export default {
   methods: {
     async request () {
       getUserInfo().then(({ data: res }) => {
-        console.log(res, '====')
         this.userInfo = res.data || {}
       })
     }
